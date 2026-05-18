@@ -1,4 +1,4 @@
 fastapi
-mangum
 uvicorn
 pydantic
+pydantic_settings
