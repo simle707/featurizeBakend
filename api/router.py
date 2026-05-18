@@ -6,6 +6,7 @@ import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from api.schemas import CreateVMRequest, LoginRequest, PaddleBillingRequest, StandardResponse
 
@@ -14,8 +15,6 @@ security = HTTPBearer()
 
 user_vms = {}
 mock_users_db = {}
-
-INTERNAL_AUTH_TOKEN = "aRuq0x72QkQsXbR2tnLXcgeJO6hvJego"
 
 # 模拟充值记录存储
 mock_transactions = [
@@ -52,13 +51,19 @@ mock_consumptions = [
     }
 ]
 
+class Setting(BaseSettings):
+    INTERNAL_AUTH_TOKEN: str
+    model_config = SettingsConfigDict(env_file=".env")
+
+settings = Setting()
+
 @router.post("/international/sessions", response_model=StandardResponse)
 async def login_session(
     req: LoginRequest,
     auth: HTTPAuthorizationCredentials = Depends(security)
 ):
     # 1. 校验 IC 后端的 Token (Bearer Token)
-    if auth.credentials != INTERNAL_AUTH_TOKEN:
+    if auth.credentials != settings.INTERNAL_AUTH_TOKEN:
         raise HTTPException(status_code=403, detail="Invalid Service Token")
     
     sub = req.sub
@@ -104,7 +109,8 @@ def check_auth(request: Request):
     # print(f"token: {bus_token}",)
     # print("request: ", request.json)
     # print(bus_token!=INTERNAL_AUTH_TOKEN)
-    if bus_token != INTERNAL_AUTH_TOKEN:
+    print("token: ",settings.INTERNAL_AUTH_TOKEN)
+    if bus_token != settings.INTERNAL_AUTH_TOKEN:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
 
