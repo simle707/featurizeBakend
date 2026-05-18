@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ed778d07-f5d8-4a53-b606-eb80a771cb7d",
+    "name": "北京-1区-4090集群",
+    "gpu_type": "RTX 4090",
+    "available_unit_count": 8,
+    "unit_price": 2.45,
+    "status": "online"
+  },
+  {
+    "id": "2e416dbc-92e2-4975-92d8-4e74f7d32dce",
+    "name": "上海-2区-4090集群",
+    "gpu_type": "RTX 6090",
+    "available_unit_count": 3,
+    "unit_price": 2.80,
+    "status": "online"
+  },
+  {
+    "id": "1e316dbc-92e2-4975-92d8-4e74f7d32dce",
+    "name": "3060算力池",
+    "gpu_type": "RTX 3060",
+    "available_unit_count": 15,
+    "unit_price": 0.8,
+    "status": "online"
+  },
+  {
+    "id": "ff888d07-a1b2-c3d4-e5f6-eb80a771cb7d",
+    "name": "A100专区",
+    "gpu_type": "A100",
+    "available_unit_count": 2,
+    "unit_price": 12.0,
+    "status": "online"
+  }
+]
