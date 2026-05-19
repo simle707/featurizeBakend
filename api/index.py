@@ -13,9 +13,9 @@ app.add_middleware(
 )
 app.include_router(gpu_router)
 
-@app.get("/api/v1/test")
+@app.get("/")
 def read_test():
-    return {"msg": "Hello"}
+    return {"msg": "Welcome"}
 
 # if __name__=="__main__":
 #     print("Server running: http://127.0.0.1:8000")
